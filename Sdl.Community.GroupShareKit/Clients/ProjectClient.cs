@@ -380,6 +380,32 @@ namespace Sdl.Community.GroupShareKit.Clients
         }
 
         /// <summary>
+        ///Uploads (replaces) a language file of a specific project
+        /// </summary>
+        /// <remarks>
+        /// This method requires authentication.
+        /// See the <a href="http://gs2017dev.sdl.com:41234/documentation/api/index#/">API documentation</a> for more information.
+        /// </remarks>
+        /// <exception cref="AuthorizationException">
+        /// Thrown when the current user does not have permission to make the request.
+        /// </exception>
+        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
+        public async Task<string> Upload(string projectId, string languageFileId, byte[] rawData, string fileName)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(projectId, "projectId");
+            Ensure.ArgumentNotNullOrEmptyString(languageFileId, "languageFileId");
+
+            var byteContent = new ByteArrayContent(rawData);
+            byteContent.Headers.Add("Content-Type", "application/xml");
+            var multipartContent = new MultipartFormDataContent
+            {
+                {byteContent,"file", fileName + ".sdlxliff"}
+            };
+
+            return await ApiConnection.Put<string>(ApiUrls.Upload(projectId, languageFileId), multipartContent);
+        }
+
+        /// <summary>
         ///Uploads file for a specific project
         /// </summary>
         /// <remarks>
@@ -400,6 +426,44 @@ namespace Sdl.Community.GroupShareKit.Clients
                 {byteContent,"file", name + ".zip"}
             };
             return await ApiConnection.Post<string>(ApiUrls.UploadFilesForProject(projectId), multipartContent, "application/zip");
+        }
+
+        /// <summary>
+        /// Checks out a language file
+        /// </summary>
+        /// <remarks>
+        /// This method requires authentication.
+        /// See the <a href="http://gs2017dev.sdl.com:41234/documentation/api/index#/">API documentation</a> for more information.
+        /// </remarks>
+        /// <exception cref="AuthorizationException">
+        /// Thrown when the current user does not have permission to make the request.
+        /// </exception>
+        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
+        public async Task CheckOutLanguageFile(string projectId, string languageFileId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(projectId, "projectId");
+            Ensure.ArgumentNotNullOrEmptyString(languageFileId, "languageFileId");
+
+            await ApiConnection.Post(ApiUrls.CheckOut(projectId, languageFileId));
+        }
+
+        /// <summary>
+        /// Checks in a language file
+        /// </summary>
+        /// <remarks>
+        /// This method requires authentication.
+        /// See the <a href="http://gs2017dev.sdl.com:41234/documentation/api/index#/">API documentation</a> for more information.
+        /// </remarks>
+        /// <exception cref="AuthorizationException">
+        /// Thrown when the current user does not have permission to make the request.
+        /// </exception>
+        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
+        public async Task CheckInLanguageFile(string projectId, string languageFileId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(projectId, "projectId");
+            Ensure.ArgumentNotNullOrEmptyString(languageFileId, "languageFileId");
+
+            await ApiConnection.Post(ApiUrls.CheckIn(projectId, languageFileId));
         }
 
         /// <summary>

@@ -317,12 +317,42 @@ namespace Sdl.Community.GroupShareKit.Helpers
         }
 
         /// <summary>
+        ///  Returns the <see cref="Uri"/> that uploads (replaces) a language file of the project
+        /// </summary>
+        /// <param name="projectId">Project id</param>
+        /// <param name="languageFileId">Language file id</param>
+        public static Uri Upload(string projectId, string languageFileId)
+        {
+            return "{0}/projects/{1}/files/{2}/upload".FormatUri(CurrentProjectServerUrl, projectId, languageFileId);
+        }
+
+        /// <summary>
         ///  Returns the <see cref="Uri"/> that adds files for project
         /// </summary>
         /// <param name="projectId">Project id</param>
         public static Uri UploadFilesForProject(string projectId)
         {
             return "{0}/projects/{1}/files/upload".FormatUri(CurrentProjectServerUrl, projectId);
+        }
+
+        /// <summary>
+        ///  Returns the <see cref="Uri"/> that checks out a language file of the project
+        /// </summary>
+        /// <param name="projectId">Project id</param>
+        /// <param name="languageFileId">Language file id</param>
+        public static Uri CheckOut(string projectId, string languageFileId)
+        {
+            return "{0}/projects/{1}/files/{2}/externalcheckout".FormatUri(CurrentProjectServerUrl, projectId, languageFileId);
+        }
+
+        /// <summary>
+        ///  Returns the <see cref="Uri"/> that checks in a language file of the project
+        /// </summary>
+        /// <param name="projectId">Project id</param>
+        /// <param name="languageFileId">Language file id</param>
+        public static Uri CheckIn(string projectId, string languageFileId)
+        {
+            return "{0}/projects/{1}/files/{2}/externalcheckin".FormatUri(CurrentProjectServerUrl, projectId, languageFileId);
         }
 
         /// <summary>
