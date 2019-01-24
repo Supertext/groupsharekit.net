@@ -243,6 +243,19 @@ namespace Sdl.Community.GroupShareKit.Clients
         Task<IReadOnlyList<ProjectAssignment>> GetProjectAssignmentById(string projectId, List<string> fileIdsList);
 
         /// <summary>
+        ///Uploads (replaces) a language file of a specific project
+        /// </summary>
+        /// <remarks>
+        /// This method requires authentication.
+        /// See the <a href="http://gs2017dev.sdl.com:41234/documentation/api/index#/">API documentation</a> for more information.
+        /// </remarks>
+        /// <exception cref="AuthorizationException">
+        /// Thrown when the current user does not have permission to make the request.
+        /// </exception>
+        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
+        Task<string> Upload(string projectId, string languageFileId, byte[] rawData, string fileName);
+
+        /// <summary>
         ///Uploads file for a specific project
         /// </summary>
         /// <remarks>
@@ -254,6 +267,32 @@ namespace Sdl.Community.GroupShareKit.Clients
         /// </exception>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         Task<string> UploadFilesForProject(string projectId, byte[] rawData, string projectName);
+
+        /// <summary>
+        /// Checks out a language file
+        /// </summary>
+        /// <remarks>
+        /// This method requires authentication.
+        /// See the <a href="http://gs2017dev.sdl.com:41234/documentation/api/index#/">API documentation</a> for more information.
+        /// </remarks>
+        /// <exception cref="AuthorizationException">
+        /// Thrown when the current user does not have permission to make the request.
+        /// </exception>
+        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
+        Task CheckOutLanguageFile(string projectId, string languageFileId);
+
+        /// <summary>
+        /// Checks in a language file
+        /// </summary>
+        /// <remarks>
+        /// This method requires authentication.
+        /// See the <a href="http://gs2017dev.sdl.com:41234/documentation/api/index#/">API documentation</a> for more information.
+        /// </remarks>
+        /// <exception cref="AuthorizationException">
+        /// Thrown when the current user does not have permission to make the request.
+        /// </exception>
+        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
+        Task CheckInLanguageFile(string projectId, string languageFileId);
 
         /// <summary>
         ///Change project status
