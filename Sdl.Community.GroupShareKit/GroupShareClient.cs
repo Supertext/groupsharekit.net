@@ -83,12 +83,14 @@ namespace Sdl.Community.GroupShareKit
             var authorization = await tokenGroupShareClient.Authenticate.Post(scopes);
             return authorization.Token;
         }
+
         public static async Task<GroupShareClient> AuthenticateClient(string user, string password, Uri baseAddress,
             IEnumerable<string> scopes)
         {
             string token = await GetRequestToken(user, password, baseAddress, scopes);
             return await AuthenticateClient(token, user, password, baseAddress, scopes);
         }
+
         public static async Task<GroupShareClient> AuthenticateClient(string token,string user, string password, Uri baseAddress,
             IEnumerable<string> scopes)
         {
@@ -100,6 +102,7 @@ namespace Sdl.Community.GroupShareKit
 
             return groupShareClient;
         }
+
         public IProjectClient Project { get; }
         public ITranslationMemoriesClient TranslationMemories { get; set; }
 
