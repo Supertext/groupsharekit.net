@@ -283,7 +283,6 @@ namespace Sdl.Community.GroupShareKit.Clients
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         Task CheckInLanguageFile(string projectId, string languageFileId);
 
-
         /// <summary>
         ///Uploads file for a specific project
         /// </summary>
