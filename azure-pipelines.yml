@@ -58,3 +58,9 @@ steps:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'drop'
     publisLocation: 'Azure Pipelines/TFS'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'NuGet push'
+  inputs:
+    command: push
+    publishVstsFeed: 'cb8b9127-7022-45a9-b98c-26761f717194'    
