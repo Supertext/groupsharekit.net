@@ -29,6 +29,14 @@ namespace Sdl.Community.GroupShareKit.Models.Response.TranslationMemory
         /// Get or sets tanget language code
         /// </summary>
         public string TargetLanguageCode { get; set; }
+
+
+        public string SourceLanguageName{ get; set; }
+        /// <summary>
+        /// Get or sets tanget language code
+        /// </summary>
+        public string TargetLanguageName { get; set; }
+
         /// <summary>
         /// Get or sets a list of files
         /// </summary>
