@@ -160,10 +160,10 @@ namespace Sdl.Community.GroupShareKit.Tests.Integration.Clients
 
 	    [Theory]
 	    [InlineData("9a39ed92-2655-43a3-bbd9-efd70eeb8e36")]
-	    public async Task AuditTrial(string projectId)
+	    public async Task AuditTrail(string projectId)
 	    {
 			var groupShareClient = await Helper.GetGroupShareClient();
-		    var auditTrial = await groupShareClient.Project.AuditTrial(projectId);
+		    var auditTrail = await groupShareClient.Project.AuditTrail(projectId);
 
 			Assert.True(auditTrial?.Count>0);  
 	    }
