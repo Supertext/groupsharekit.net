@@ -163,7 +163,7 @@ namespace Sdl.Community.GroupShareKit.Tests.Integration.Clients
 	    public async Task AuditTrail(string projectId)
 	    {
 			var groupShareClient = await Helper.GetGroupShareClient();
-		    var auditTrail = await groupShareClient.Project.AuditTrail(projectId);
+		    var auditTrial = await groupShareClient.Project.AuditTrail(projectId);
 
 			Assert.True(auditTrial?.Count>0);  
 	    }

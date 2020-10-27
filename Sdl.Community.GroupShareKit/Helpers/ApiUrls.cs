@@ -605,6 +605,16 @@ namespace Sdl.Community.GroupShareKit.Helpers
         {
             return "{0}/tms/{1}/tus/{2}".FormatUri(CurrentTranslationMemoriesUrl, tmId, action);
         }
+
+
+        /// <summary>
+        /// Returns the <see cref="Uri"/> that deletes a translation unit
+        /// </summary>
+        public static Uri TranslationUnitsDelete(string tmId, string source, string target)
+        {
+            return "{0}/tms/{1}/tus/{2}/{3}".FormatUri(CurrentTranslationMemoriesUrl, tmId, source, target);
+        }
+
         /// <summary>
         /// Returns the <see cref="Uri"/> that retrieves the translation units from the Translation memory
         /// </summary>

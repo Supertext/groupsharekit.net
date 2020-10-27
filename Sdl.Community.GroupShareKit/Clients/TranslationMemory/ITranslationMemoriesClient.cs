@@ -291,6 +291,19 @@ namespace Sdl.Community.GroupShareKit.Clients.TranslationMemory
             FieldTemplate fieldTemplate);
 
         /// <summary>
+        /// Deletes specified tu .
+        /// </summary>
+        /// <remarks>
+        /// This method requires authentication.
+        /// See the <a href="http://gs2017dev.sdl.com:41235/docs/ui/index#/">API documentation</a> for more information.
+        /// </remarks>
+        /// <exception cref="AuthorizationException">
+        /// Thrown when the current user does not have permission to make the request.
+        /// </exception>
+        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
+        Task DeleteTu(TranslationUnitRequest unitRequest, string tmId);
+
+        /// <summary>
         /// Gets specified translation unit for TM
         /// <param name="request"><see cref="TranslationUnitDetailsRequest"/></param>
         /// <param name="tmId">Translation memory id</param>

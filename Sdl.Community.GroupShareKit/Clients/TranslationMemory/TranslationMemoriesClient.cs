@@ -410,6 +410,46 @@ namespace Sdl.Community.GroupShareKit.Clients.TranslationMemory
         }
 
         /// <summary>
+        /// Deletes specified tu .
+        /// </summary>
+        /// <remarks>
+        /// This method requires authentication.
+        /// See the <a href="http://gs2017dev.sdl.com:41235/docs/ui/index#/">API documentation</a> for more information.
+        /// </remarks>
+        /// <exception cref="AuthorizationException">
+        /// Thrown when the current user does not have permission to make the request.
+        /// </exception>
+        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
+        public async Task DeleteTu(TranslationUnitRequest unitRequest, string tmId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(tmId, "tmId");
+
+            var request = new ExportRequest();
+            var sourceTextField = new FieldsDuplicate
+                                 {
+                                     Name = "Source Text",
+                                     Type = FieldsDuplicate.TypeEnum.SingleString
+                                 };
+            var exportFilter = new FilterExport
+                               {
+                                   Fields = new List<FieldsDuplicate>()
+                               };
+            request.Filter = exportFilter;
+            request.Filter.Fields.Add(sourceTextField);
+            request.Filter.Expression = $"src = \"{unitRequest.TranslationUnit.Source.Text}\" & trg = \"{unitRequest.TranslationUnit.Target.Text}\"";
+            try
+            {
+                await ApiConnection.Delete(ApiUrls.TranslationUnitsDelete(tmId, unitRequest.TranslationUnit.Source.Language, unitRequest.TranslationUnit.Target.Language), request, "application/json");
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Gets specified translation unit for TM
         /// <param name="request"><see cref="TranslationUnitDetailsRequest"/></param>
         /// <param name="tmId">Translation memory id</param>
